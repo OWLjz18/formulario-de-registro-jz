@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Formulario de registro</title>
+  <link rel="stylesheet" href="./IconeJz/src/iconejz.css">
+  <script src="./IconeJz/src/iconejz.js"></script>
+  <link rel="stylesheet" href="./css/magic.css">
+</head>
+<body>
+  
+  <div class="contenedor">
+    
+    <form class="formulario">
+      
+      <!-- Nombre -->
+      <formulario-campo
+        requerido="true"
+        titulo="Nombre"
+        input-id="nombre"
+        mensaje-ejemplo="Kirby"
+        mensaje-error="El nombre debe tener de 4 a 20 carácteres y solo se admiten letras."
+      ></formulario-campo>
+      
+      <!-- Usuario -->
+      <formulario-campo
+        requerido="true"
+        titulo="Usuario"
+        input-id="usuario"
+        mensaje-ejemplo="Kirby_night10"
+        mensaje-error="El nombre de usuario debe tener de 4 a 20 carácteres y solo se admiten letras, numeros, puntos, guiones bajos y guiones medios."
+      ></formulario-campo>
+      
+      <!-- Telefono -->
+      <formulario-campo
+        titulo="Telefono"
+        input-id="telefono"
+        input-type="number"
+        mensaje-ejemplo="00 816 0281"
+        mensaje-error="El número telefónico debe tener de 12 a 15 digitos."
+      ></formulario-campo>
+      
+      <!-- Correo -->
+      <formulario-campo 
+        requerido="true"
+        titulo="Correo Electrónico"
+        input-id="correo"
+        input-type="email"
+        mensaje-ejemplo="kirby_the_amazing@mirror.com"
+        mensaje-error="El correo debe tener de 10 a 20 carácteres y solo se admiten letras, numeros, guiones bajos, @ y puntos."
+      ></formulario-campo>
+      
+      <!-- Password -->
+      <formulario-campo 
+        requerido="true"
+        titulo="Contraseña"
+        input-id="password"
+        input-type="password"
+        mensaje-ejemplo="************"
+        mensaje-error="La contraseña debe tener de 6 a 16 carácteres y se admiten todo tipo de símbolos. Puede pulsar dos veces el campo para visualizar su contraseña y si lo desea, dos veces más para ocultarlo."
+      ></formulario-campo>
+      
+      <!-- Confirmar Password -->
+      <formulario-campo 
+        requerido="true"
+        titulo="Confirmar Contraseña"
+        input-id="password2"
+        input-type="password"
+        mensaje-ejemplo="************"
+        mensaje-error="La contraseña no coincide con la anterior."
+      ></formulario-campo>
+      
+      <!-- Boton -->
+      <div class="formulario__boton--contenedor">
+        <input type="submit" class="formulario__boton" value="Enviar">
+        
+        <p class="formulario__mensaje">Por favor complete todos los campos necesarios <span class="formulario__signoRequerido">(*)</span>.</p>
+      </div>
+      
+    </form>
+    
+  </div>
+  
+  <script src="./componentes/formulario_campo.js"></script>
+  <script src="./js/code.js"></script>
+</body>
+</html>

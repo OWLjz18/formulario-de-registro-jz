@@ -1,0 +1,106 @@
+.campo {
+  --color-error: #FF0000;
+  --color-exito: #00FF3B;
+  --color-grupo-requerido: #FF9A00;
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.campo__input::placeholder {
+  user-select: none;
+}
+
+.campo--requerido .campo__titulo::before {
+  content: "* ";
+  color: var(--color-grupo-requerido);
+}
+
+.campo__titulo {
+  font-size: 24px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.campo__input--contenedor {
+  width: 100%;
+  margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.campo__input {
+  width: 100%;
+  color: var(--color-blanco);
+  padding: 4px;
+  padding-left: 8px;
+  border: 2px dashed var(--color-blanco);
+  border-radius: 2px; 
+  background-color: transparent;
+  outline: none;
+  transition: all 0.25s linear;
+  transition-property: border-color, border-bottom-color, border-bottom-style;
+}
+
+.campo__input:focus {
+  border-color: transparent;
+  border-bottom-color: var(--color-blanco);
+  border-bottom-style: solid;
+}
+
+.campo__iconoValidacion {
+  position: absolute;
+  right: 0;
+  transform: scale(0);
+  transition: transform 0.25s linear;
+}
+
+.campo__mensajeError {
+  height: 0;
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+  transform: scale(0);
+}
+
+/* 
+  
+  [ Estados de los campos ]
+  
+*/
+/* Error */
+.campo--error.campo--requerido .campo__titulo::before {
+  color: var(--color-error);
+}
+
+.campo--error .campo__input {
+  border-color: var(--color-error);
+}
+
+.campo--error .campo__input:focus {
+  border-color: transparent;
+  border-bottom-color: var(--color-error);
+}
+
+.campo--error .campo__iconoValidacion,
+.campo--exito .campo__iconoValidacion {
+  transform: scale(1);
+}
+
+.campo--error .campo__mensajeError {
+  height: auto;
+  transform: scale(1);
+}
+
+/* Éxito */
+.campo--exito .campo__input:focus {
+  border-bottom-color: var(--color-exito);  
+}
+
+.campo--exito.campo--requerido .campo__titulo::before {
+  color: var(--color-exito);
+}
