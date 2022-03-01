@@ -1,0 +1,27 @@
+{
+  "name": "formulario-de-registro-jz",
+  "version": "1.0.0",
+  "description": "Formulario de registro con envio por correo",
+  "main": "src/index.js",
+  "scripts": {
+    "code": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWLjz18/Formulario-de-registro.git"
+  },
+  "keywords": [],
+  "author": "OWLjz18 <owl.jz18@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OWLjz18/Formulario-de-registro/issues"
+  },
+  "homepage": "https://github.com/OWLjz18/Formulario-de-registro#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nodemailer": "^6.7.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
+  }
+}

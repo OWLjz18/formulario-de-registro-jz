@@ -42,6 +42,7 @@ const formularioCampo = class extends HTMLElement {
     
     const input = document.createElement('input');
     input.setAttribute('type', this._inputType);
+    input.setAttribute('name', this.inputId);
     input.setAttribute('class', 'campo__input');
     input.setAttribute('id', `campo__input--${this.inputId}`);
     input.setAttribute('autocomplete', this._autocompletar);

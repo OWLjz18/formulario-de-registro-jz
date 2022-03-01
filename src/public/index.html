@@ -13,7 +13,7 @@
   
   <div class="contenedor">
     
-    <form class="formulario">
+    <form class="formulario" action='/send-email' method='POST'>
       
       <!-- Nombre -->
       <formulario-campo
@@ -74,7 +74,7 @@
       
       <!-- Boton -->
       <div class="formulario__boton--contenedor">
-        <input type="submit" class="formulario__boton" value="Enviar">
+        <button class="formulario__boton">Enviar</button>
         
         <p class="formulario__mensaje">Por favor complete todos los campos necesarios <span class="formulario__signoRequerido">(*)</span>.</p>
       </div>

@@ -25,7 +25,7 @@ const listaCampos = [
   },
   {
     campo: 'correo',
-    regexp: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
+    regexp: /^[a-zA-Z0-9\.\-\_]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
     requerido: true,
     completado: false
   },
@@ -166,27 +166,27 @@ camposPassword.forEach( campoPassword => {
 // Evento de enviado
 
 formulario.addEventListener('submit', event => {
-  
+
   event.preventDefault();
-  
+
   if ( totalCamposCompletados() < totalCamposRequeridos() ) {
-    
+
     formularioMensaje.classList.add('formulario__mensaje--activo');
-    
+
     const camposRequeridos = listaCampos.filter(objCampo => objCampo.requerido);
     const nombreCamposIncompletos = camposRequeridos.filter(objCampo => !objCampo.completado).map(objCampo => objCampo.campo);
-    
+
     nombreCamposIncompletos.forEach(campoIncompleto => document.querySelector(`[input-id="${campoIncompleto}"]`).setAttribute('estado', 'error'));
     return;
-    
+
   }
-  
+
   if (formularioMensaje.classList.contains('formulario__mensaje--activo')) {
-    
+
     formularioMensaje.classList.remove('formulario__mensaje--activo');
-    
+
   }
-  
+
   formulario.submit();
-  
+
 });
