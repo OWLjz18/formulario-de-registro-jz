@@ -2,13 +2,6 @@ const formularioCampo = class extends HTMLElement {
   
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' }); 
-    
-    const styleLigthDOM = document.createElement('link');
-    styleLigthDOM.rel = 'stylesheet'
-    styleLigthDOM.href = '/componentes/formulario_campo.css';
-    
-    this.shadowRoot.appendChild(styleLigthDOM);
     
     this.titulo = this.getAttribute('titulo') ?? 'Sin Titulo';
     this.inputId = this.getAttribute('input-id') ?? '#';
@@ -17,14 +10,6 @@ const formularioCampo = class extends HTMLElement {
     
     this._inputType = this.getAttribute('input-type') ?? 'text';
     this._autocompletar = this.getAttribute('autocompletar') ?? 'off';
-  }
-  
-  set inputValue(valor) {
-    this.shadowRoot.querySelector('.campo__input').value = valor;
-  }
-  
-  get inputValue() {
-    return this.shadowRoot.querySelector('.campo__input').value;
   }
   
   _render() {
@@ -61,15 +46,31 @@ const formularioCampo = class extends HTMLElement {
     inputContenedor.append(input, iconoValidacion);
     campo.append(label, inputContenedor, mensaje_error);
     
-    this.shadowRoot.appendChild(campo);
+    this.appendChild(campo);
+    
+    const eventoBlur = new CustomEvent('campo-blur', { bubbles: true });
+    
+    input.addEventListener('blur', () => campo.dispatchEvent(eventoBlur));
     
   }
   
+  set inputValue(valor) {
+    
+    this.querySelector('.campo__input').value = valor;
+    
+  }
+  
+  get inputValue() {
+    
+    return this.querySelector('.campo__input').value;
+    
+  }
+
   _validarEstado(valorEstado) {
     
-    const campo = this.shadowRoot.querySelector('.campo');
+    const campo = this.querySelector('.campo');
     
-    const iconoValidacion = this.shadowRoot.querySelector('.campo__iconoValidacion');
+    const iconoValidacion = this.querySelector('.campo__iconoValidacion');
     iconoValidacion.setAttribute('c', `var(--color-${valorEstado})`);
     
     if (valorEstado == 'inicial') {
@@ -103,7 +104,7 @@ const formularioCampo = class extends HTMLElement {
     switch (nombreAtributo) {
       
       case 'titulo':
-          this.shadowRoot.querySelector('.campo__titulo').innerHTML = valorAtributo;
+          this.querySelector('.campo__titulo').innerHTML = valorAtributo;
         break;
         
       case 'estado':
@@ -112,20 +113,20 @@ const formularioCampo = class extends HTMLElement {
         
       case 'requerido':
           if (this.getAttribute('requerido')){
-            this.shadowRoot.querySelector('.campo').classList.add('campo--requerido');
+            this.querySelector('.campo').classList.add('campo--requerido');
           }
         break;
         
       case 'input-type':
-          this.shadowRoot.querySelector('.campo__input').type = valorAtributo;
+          this.querySelector('.campo__input').type = valorAtributo;
         break;
         
       case 'mensaje-ejemplo':
-          this.shadowRoot.querySelector('.campo__input').placeholder = valorAtributo;
+          this.querySelector('.campo__input').placeholder = valorAtributo;
         break;
       
       case 'mensaje-error':
-          this.shadowRoot.querySelector('.campo__mensajeError').innerHTML = valorAtributo;
+          this.querySelector('.campo__mensajeError').innerHTML = valorAtributo;
         break;
         
       default:

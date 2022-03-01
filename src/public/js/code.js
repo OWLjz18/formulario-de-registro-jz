@@ -1,4 +1,4 @@
-'use strict';
+import esRequerido from './es-requerido.js';
 
 const formulario = document.querySelector('.formulario');
 const formularioCampos = document.querySelectorAll('formulario-campo');
@@ -8,36 +8,36 @@ const listaCampos = [
   {
     campo: 'nombre',
     regexp: /^[a-zA-Z\s]{4,20}$/,
-    requerido: true,
+    requerido: esRequerido('nombre'),
     completado: false
   },
   {
     campo: 'usuario',
     regexp: /^[a-zA-Z0-9\.\_\-\s]{4,20}$/,
-    requerido: true,
+    requerido: esRequerido('usuario'),
     completado: false
   },
   {
     campo: 'telefono',
     regexp: /^\d{10,15}$/,
-    requerido: false,
+    requerido: esRequerido('telefono'),
     completado: false
   },
   {
     campo: 'correo',
     regexp: /^[a-zA-Z0-9\.\-\_]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
-    requerido: true,
+    requerido: esRequerido('correo'),
     completado: false
   },
   {
     campo: 'password',
     regexp: /^[^\s]{6,16}$/,
-    requerido: true,
+    requerido: esRequerido('password'),
     completado: false
   },
   {
     campo: 'password2',
-    requerido: true,
+    requerido: esRequerido('password2'),
     completado: false
   }
 ]; 
@@ -127,7 +127,7 @@ formularioCampos.forEach( campo => {
     
   });
   
-  campo.addEventListener('blur', () => {
+  campo.addEventListener('campo-blur', () => {
     
     if (!campo.getAttribute('requerido') && campo.getAttribute('estado') == 'error') {
       
@@ -159,7 +159,7 @@ camposPassword.forEach( campoPassword => {
     
   });
   
-  campoPassword.addEventListener('blur', () => campoPassword.setAttribute('input-type', 'password') );
+  campoPassword.addEventListener('campo-blur', () => campoPassword.setAttribute('input-type', 'password') );
 
 });
 
@@ -168,7 +168,7 @@ camposPassword.forEach( campoPassword => {
 formulario.addEventListener('submit', event => {
 
   event.preventDefault();
-
+  
   if ( totalCamposCompletados() < totalCamposRequeridos() ) {
 
     formularioMensaje.classList.add('formulario__mensaje--activo');
