@@ -4,15 +4,18 @@
   "description": "Formulario de registro con envio por correo",
   "main": "src/index.js",
   "scripts": {
-    "code": "node src/index.js"
+    "start": "node src/index.js"
   },
+  "keywords": [
+    "formulario",
+    "formulario-registro"
+  ],
+  "license": "MIT",
+  "author": "OWLjz18 <owl.jz18@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OWLjz18/Formulario-de-registro.git"
   },
-  "keywords": [],
-  "author": "OWLjz18 <owl.jz18@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/OWLjz18/Formulario-de-registro/issues"
   },

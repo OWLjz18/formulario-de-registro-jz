@@ -1,8 +1,10 @@
-.campo {
+:root {
   --color-error: #FF0000;
   --color-exito: #00FF3B;
   --color-grupo-requerido: #FF9A00;
-  
+}
+
+.campo {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
