@@ -14,12 +14,12 @@
   "author": "OWLjz18 <owl.jz18@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWLjz18/Formulario-de-registro.git"
+    "url": "git+https://github.com/OWLjz18/formulario-de-registro-jz.git"
   },
   "bugs": {
-    "url": "https://github.com/OWLjz18/Formulario-de-registro/issues"
+    "url": "https://github.com/OWLjz18/formulario-de-registro-jz/issues"
   },
-  "homepage": "https://github.com/OWLjz18/Formulario-de-registro#readme",
+  "homepage": "https://github.com/OWLjz18/formulario-de-registro-jz#readme",
   "dependencies": {
     "express": "^4.17.3",
     "nodemailer": "^6.7.2"
