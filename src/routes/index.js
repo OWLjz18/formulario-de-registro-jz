@@ -5,26 +5,28 @@ const fs = require('fs');
 
 require('dotenv').config();
 
-router.post('/send-email', async (req, res) => {
+router.post('/enviar-email', async (req, res) => {
 
   const { 
-    nombre: name,
-    usuario: username,
-    telefono: phone,
-    correo: email,
+    nombre,
+    usuario,
+    telefono,
+    correo,
     password
   } = req.body;
 
-  const message = `
+  const enlaceFormulario = 'https://owljz18.github.io/formulario-de-registro-js';
+
+  const mensaje = `
   <h1>Formulario de Registro JZ</h1>
   
-  <p>Acá le dejo sus datos introducidos en el <a href="https://owljz18.github.io/formulario-de-registro-js">formulario</a>, muchas gracias por probar este proyecto!</p>
+  <p>Acá le dejo sus datos introducidos en el <a href="${enlaceFormulario}">formulario</a>, muchas gracias por probar este proyecto!</p>
 
   <ul>
-    <li>Nombre: ${name}</li>
-    <li>Usuario: ${username}</li>
-    ${ (phone != '') ? `<li>Telefono: ${phone}</li>` : '' }
-    <li>Correo: ${email}</li>
+    <li>Nombre: ${nombre}</li>
+    <li>Usuario: ${usuario}</li>
+    ${ (telefono != '') ? `<li>Telefono: ${telefono}</li>` : '' }
+    <li>Correo: ${correo}</li>
     <li>Contraseña: ${password}</li>
   </ul>
   `;
@@ -44,9 +46,9 @@ router.post('/send-email', async (req, res) => {
 
   await transporter.sendMail({
     from: `Formulario de registro JZ <${process.env.USER_EMAIL}>`,
-    to: `${name} <${email}>`,
+    to: `${nombre} <${correo}>`,
     subject: 'Simulación de registro realizada con éxito!',
-    html: message
+    html: mensaje
   });
 
   console.log('Formulario enviado con éxito!');
