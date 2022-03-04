@@ -14,13 +14,14 @@
   
   <div class="contenedor">
     
-    <form class="formulario" action='/send-email' method='POST'>
+    <form class="formulario" action='/enviar-email' method='POST'>
       
       <!-- Nombre -->
       <formulario-campo
         requerido="true"
         titulo="Nombre"
         input-id="nombre"
+        input-regexp="^[a-zA-Z\s]{4,20}$"
         mensaje-ejemplo="Kirby"
         mensaje-error="El nombre debe tener de 4 a 20 carácteres y solo se admiten letras."
       ></formulario-campo>
@@ -30,6 +31,7 @@
         requerido="true"
         titulo="Usuario"
         input-id="usuario"
+        input-regexp="^[a-zA-Z0-9\.\_\-\s]{4,20}$"
         mensaje-ejemplo="Kirby_night10"
         mensaje-error="El nombre de usuario debe tener de 4 a 20 carácteres y solo se admiten letras, numeros, puntos, guiones bajos y guiones medios."
       ></formulario-campo>
@@ -39,6 +41,7 @@
         titulo="Telefono"
         input-id="telefono"
         input-type="number"
+        input-regexp="^\d{10,15}$"
         mensaje-ejemplo="00 816 0281"
         mensaje-error="El número telefónico debe tener de 12 a 15 digitos."
       ></formulario-campo>
@@ -49,6 +52,7 @@
         titulo="Correo Electrónico"
         input-id="correo"
         input-type="email"
+        input-regexp="^[a-zA-Z0-9\.\-\_]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$"
         mensaje-ejemplo="kirby_the_amazing@mirror.com"
         mensaje-error="El correo debe tener de 10 a 20 carácteres y solo se admiten letras, numeros, guiones bajos, @ y puntos."
       ></formulario-campo>
@@ -59,6 +63,7 @@
         titulo="Contraseña"
         input-id="password"
         input-type="password"
+        input-regexp="^\S{6,16}$"
         mensaje-ejemplo="************"
         mensaje-error="La contraseña debe tener de 6 a 16 carácteres y se admiten todo tipo de símbolos. Puede pulsar dos veces el campo para visualizar su contraseña y si lo desea, dos veces más para ocultarlo."
       ></formulario-campo>
@@ -85,6 +90,6 @@
   </div>
   
   <script src="./componentes/formulario_campo.js"></script>
-  <script src="./js/code.js" type="module"></script>
+  <script src="./js/code.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ const formularioCampo = class extends HTMLElement {
     this.titulo = this.getAttribute('titulo') ?? 'Sin Titulo';
     this.inputId = this.getAttribute('input-id') ?? '#';
     this.mensajeError = this.getAttribute('mensaje-error') ?? '';
-    this.mensajeEjemplo = this.getAttribute('mensaje-ejemplo') ?? 'Buscar...';
+    this.mensajeEjemplo = this.getAttribute('mensaje-ejemplo') ?? 'Placeholder...';
     
     this._inputType = this.getAttribute('input-type') ?? 'text';
     this._autocompletar = this.getAttribute('autocompletar') ?? 'off';
@@ -33,6 +33,13 @@ const formularioCampo = class extends HTMLElement {
     input.setAttribute('autocomplete', this._autocompletar);
     input.setAttribute('placeholder', this.mensajeEjemplo);
     
+    // const input = document.createElement('input');
+    // input.setAttribute('type', this._inputType)
+    //            .setAttribute('name', this.inputId)
+    //            .setAttribute('class', 'campo__input')
+    //            .setAttribute('id', `campo__input--${this.inputId}`)
+    //            .setAttribute('autocomplete', this._autocompletar);
+
     const iconoValidacion = document.createElement('jz-x');
     iconoValidacion.setAttribute('class', 'campo__iconoValidacion');
     iconoValidacion.setAttribute('s', '28px');
@@ -143,12 +150,12 @@ const formularioCampo = class extends HTMLElement {
   }
   
   static get observedAttributes() {
-    return ['titulo', 'estado', 'requerido', 'input-type', 'input-id', 'mensaje-error', 'mensaje-ejemplo', 'autocompletar'];
+    return ['titulo', 'estado', 'requerido', 'input-type', 'input-id', 'input-regexp', 'mensaje-error', 'mensaje-ejemplo', 'autocompletar'];
   }
   
   attributeChangedCallback(name, oldValue, newValue) {
     
-    if (newValue !== null && name !== 'input-id') {
+    if (newValue !== null && name !== 'input-id' && name !== 'input-regexp') {
       
       setTimeout(() => this._actualizarContenido(name, newValue));
       

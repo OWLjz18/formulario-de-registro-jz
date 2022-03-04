@@ -1,46 +1,19 @@
-import esRequerido from './es-requerido.js';
-
 const formulario = document.querySelector('.formulario');
 const formularioCampos = document.querySelectorAll('formulario-campo');
 const formularioMensaje = document.querySelector('.formulario__mensaje');
 
-const listaCampos = [
-  {
-    campo: 'nombre',
-    regexp: /^[a-zA-Z\s]{4,20}$/,
-    requerido: esRequerido('nombre'),
+const listaCampos = [];
+
+formularioCampos.forEach( campo => {
+  
+  listaCampos.push({
+    nombre: campo.getAttribute('input-id'),
+    regexp: new RegExp(campo.getAttribute('input-regexp') ?? ''),
+    requerido: campo.getAttribute('requerido') ?? false,
     completado: false
-  },
-  {
-    campo: 'usuario',
-    regexp: /^[a-zA-Z0-9\.\_\-\s]{4,20}$/,
-    requerido: esRequerido('usuario'),
-    completado: false
-  },
-  {
-    campo: 'telefono',
-    regexp: /^\d{10,15}$/,
-    requerido: esRequerido('telefono'),
-    completado: false
-  },
-  {
-    campo: 'correo',
-    regexp: /^[a-zA-Z0-9\.\-\_]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
-    requerido: esRequerido('correo'),
-    completado: false
-  },
-  {
-    campo: 'password',
-    regexp: /^[^\s]{6,16}$/,
-    requerido: esRequerido('password'),
-    completado: false
-  },
-  {
-    campo: 'password2',
-    requerido: esRequerido('password2'),
-    completado: false
-  }
-]; 
+  });
+
+});
 
 const totalCamposRequeridos = () => listaCampos.filter(objCampo => objCampo.requerido).length;
 const totalCamposCompletados = () => listaCampos.filter(objCampo => objCampo.completado).length;
@@ -65,18 +38,18 @@ formularioCampos.forEach( campo => {
     
     if (campo.inputId !== 'password2') {
       
-      const validadorCampo = listaCampos.find(objCampo => objCampo.campo == campo.inputId);
+      const campoParaValidar = listaCampos.find(objCampo => objCampo.nombre == campo.inputId);
       
-      if ( validadorCampo.regexp.test(campo.inputValue) ) {
+      if ( campoParaValidar.regexp.test(campo.inputValue) ) {
         
         campo.setAttribute('estado', 'exito');
-        validadorCampo.completado = true;
+        campoParaValidar.completado = true;
         desactivarMensajeError();
         
       } else {
         
         campo.setAttribute('estado', 'error');
-        validadorCampo.completado = false;
+        campoParaValidar.completado = false;
         
       }
       
@@ -85,12 +58,12 @@ formularioCampos.forEach( campo => {
     if (campo.inputId == 'password') {
       
       const password2 = document.querySelector('[input-id="password2"]');
-      const validadorCampo = listaCampos.find(objCampo => objCampo.campo == 'password2');
+      const campoParaValidar = listaCampos.find(objCampo => objCampo.nombre == 'password2');
       
       if (/^\S/.test(password2.inputValue) && password2.inputValue === campo.inputValue) {
         
         password2.setAttribute('estado', 'exito');
-        validadorCampo.completado = true;
+        campoParaValidar.completado = true;
         return;
         
       }
@@ -98,7 +71,7 @@ formularioCampos.forEach( campo => {
       if (/^\S/.test(password2.inputValue) && password2.inputValue !== campo.inputValue) {
         
         password2.setAttribute('estado', 'error');
-        validadorCampo.completado = false;
+        campoParaValidar.completado = false;
         return;
         
       }
@@ -107,21 +80,20 @@ formularioCampos.forEach( campo => {
     
     if (campo.inputId == 'password2') {
       
-      const validadorCampo = listaCampos.find(objCampo => objCampo.campo == campo.inputId);
-      
       const password = document.querySelector('[input-id="password"]');
+      const campoParaValidar = listaCampos.find(objCampo => objCampo.nombre == campo.inputId);
       
       if (campo.inputValue === password.inputValue && /^\S/.test(campo.inputValue) && /^\S/.test(password.inputValue) ) {
         
         campo.setAttribute('estado', 'exito');
-        validadorCampo.completado = true;
+        campoParaValidar.completado = true;
         desactivarMensajeError();
         return;
         
       }
       
       campo.setAttribute('estado', 'error');
-      validadorCampo.completado = false;
+      campoParaValidar.completado = false;
       
     }
     
@@ -131,8 +103,8 @@ formularioCampos.forEach( campo => {
     
     if (!campo.getAttribute('requerido') && campo.getAttribute('estado') == 'error') {
       
-      campo.inputValue = '';
       campo.setAttribute('estado', 'inicial');
+      campo.inputValue = '';
       
     } 
     
@@ -170,21 +142,21 @@ formulario.addEventListener('submit', event => {
   event.preventDefault();
   
   if ( totalCamposCompletados() < totalCamposRequeridos() ) {
-
+    
     formularioMensaje.classList.add('formulario__mensaje--activo');
-
+    
     const camposRequeridos = listaCampos.filter(objCampo => objCampo.requerido);
     const nombreCamposIncompletos = camposRequeridos.filter(objCampo => !objCampo.completado).map(objCampo => objCampo.campo);
-
+    
     nombreCamposIncompletos.forEach(campoIncompleto => document.querySelector(`[input-id="${campoIncompleto}"]`).setAttribute('estado', 'error'));
     return;
-
+    
   }
-
+  
   if (formularioMensaje.classList.contains('formulario__mensaje--activo')) {
-
+    
     formularioMensaje.classList.remove('formulario__mensaje--activo');
-
+    
   }
 
   formulario.submit();
