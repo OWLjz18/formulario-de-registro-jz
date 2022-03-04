@@ -18,7 +18,7 @@ router.post('/enviar-email', async (req, res) => {
     password
   } = req.body;
 
-  const enlaceFormulario = 'https://owljz18.github.io/formulario-de-registro-js';
+  const enlaceFormulario = 'https://formulario-de-registro-jz.herokuapp.com/';
 
   const mensaje = `
   <h1>Formulario de Registro JZ</h1>
